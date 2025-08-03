@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<title>Welcome!</title>
+<main class="main">
+
+    <section id="hero" class="hero section">
+
+      <div class="container">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-6 d-flex text-center" data-aos="fade-up" data-aos-delay="100">
+            <h2><span class="underlight">Correction Fluid </span><span>Game Rating</span>
+            <a href="{% url 'gallery' %}" class="btn-get-started">Rate your Game<br></a>
+          </div>
+        </div>
+      </div>
+
+    
+    </section>
+
+    <section id="gallery" class="gallery section">
+
+      <div class="container-fluid" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+          {% for o in obj %}
+          <div class="col-xl-3 col-lg-4 col-md-6">
+            {{ o.value }}
+            <div class="gallery-item h-100">
+              <img src="{{ o.game.image }}" class="img preview-img" alt="" style="height: 200px;" id="img-{{ o.game.id }}">
+              
+              <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="javascript:void(0);" class="preview-link" title="Open Game in New Window"
+                  onclick="window.open('{% url 'gd-iframe' o.game.id %}', 'GameWindow', 'width=1000,height=700');">
+                  <i class="bi bi-arrows-angle-expand"></i>
+                </a>
+              </div>
+            </div> 
+          </div>
+          {% endfor %}      
+        </div>
+
+      </div>
+
+    </section>
+
+    <section id="testimonials" class="testimonials section">
+
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Users</h2>
+        <p>Latest ratings</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="swiper init-swiper">
+          <script type="application/json" class="swiper-config">
+            {
+              "loop": true,
+              "speed": 600,
+              "autoplay": {
+                "delay": 5000
+              },
+              "slidesPerView": "auto",
+              "pagination": {
+                "el": ".swiper-pagination",
+                "type": "bullets",
+                "clickable": true
+              },
+              "breakpoints": {
+                "320": {
+                  "slidesPerView": 1,
+                  "spaceBetween": 40
+                },
+                "1200": {
+                  "slidesPerView": 3,
+                  "spaceBetween": 1
+                }
+              }
+            }
+          </script>
+          <div class="swiper-wrapper">
+
+            {% for lat in latest %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <h3>Total rating: {{ lat.value }}</h3>
+                <p>
+                  {{ lat.game }}
+                </p>
+                <div class="profile mt-auto">
+                  <img src="{{ lat.game.image }}" class="img-fluid" style="height: 200px;" alt="">
+                  <h3></h3>
+                  <h3>{{ lat.user }}</h3>
+                </div>
+              </div>
+            </div><!-- End testimonial item -->
+            {% endfor %}
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script>
+  function showIframe(gameId) {
+
+    document.querySelectorAll('.iframe-wrapper').forEach(el => el.style.display = 'none');
+    document.querySelectorAll('.preview-img').forEach(el => el.style.display = 'block');
+
+    document.getElementById(`img-${gameId}`).style.display = 'none';
+
+    document.getElementById(`iframe-${gameId}`).style.display = 'block';
+  }
+</script>
+  {% endblock %}

@@ -1,0 +1,367 @@
+{% extends 'base.html' %}
+
+{% block content%}
+{% load static %}
+<title>{{ game.name }}</title>
+  <main class="main">
+
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>{{ game.name }}</h1>  
+              <img src="{{ game.image }}" class="img-fluid">
+              
+          </div>
+          <p><a href="{% url 'game_detail' game.id %}"> back to game page</a></p>
+        </div>
+      </div>
+      
+    </div>
+    </div>
+      
+
+
+    <section id="pricing" class="pricing section">
+    <div class="container">
+
+      <div class="row justify-content-center">
+        <h2 class="section-heading">Narrative</h2>
+        <br></br>
+        <br></br>
+
+    <div class="styled-slider">
+      <div class="slider-header">
+        <strong>Story (lore, plot)</strong>
+        <span class="value-display" id="storyValue">0</span>
+      </div>
+      <div class="slider-wrapper">
+        <span class="min-label">0</span>
+        <input type="range" min="0" max="10" value="0" class="slider" id="storySlider" data-output="storyValue" data-desc="storyDesc">
+        <span class="max-label">10</span>
+      </div>
+      <div class="description" id="storyDesc"></div>
+    </div>
+    <br></br>
+    <br></br>
+    <br></br>
+
+    <div class="styled-slider">
+          <div class="slider-header">
+            <strong>World Building</strong>
+            <span class="value-display" id="worldValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="10" value="0" class="slider" id="worldSlider" data-output="worldValue" data-desc="worldDesc">
+            <span class="max-label">10</span>
+          </div>
+          <div class="description" id="worldDesc"></div>
+        </div>
+    <br></br>
+    <br></br>
+    
+    
+      <div class="row justify-content-center">
+        <h2 class="section-heading">Gameplay</h2>
+        <br></br>
+        <br></br>
+
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Game Balance</strong>
+            <span class="value-display" id="balanceValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="10" value="0" class="slider" id="balanceSlider" data-output="balanceValue" data-desc="balanceDesc">
+            <span class="max-label">10</span>
+          </div>
+          <div class="description" id="balanceDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Gameplay Uniqueness</strong>
+            <span class="value-display" id="uniqValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="4" value="0" class="slider" id="uniqSlider" data-output="uniqValue" data-desc="uniqDesc">
+            <span class="max-label">4</span>
+          </div>
+          <div class="description" id="uniqDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+
+
+    <div class="row justify-content-center">
+        <h2 class="section-heading">Technical part</h2>
+        <br></br>
+        <br></br>
+
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Graphic Quality</strong>
+            <span class="value-display" id="techValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="4" value="0" class="slider" id="techSlider" data-output="techValue" data-desc="techDesc">
+            <span class="max-label">4</span>
+          </div>
+          <div class="description" id="techDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+    
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Bugs</strong>
+            <span class="value-display" id="aestValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="4" value="0" class="slider" id="aestSlider" data-output="aestValue" data-desc="aestDesc">
+            <span class="max-label">4</span>
+          </div>
+          <div class="description" id="aestDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+    
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Animation</strong>
+            <span class="value-display" id="animValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="4" value="0" class="slider" id="animSlider" data-output="animValue" data-desc="animDesc">
+            <span class="max-label">4</span>
+          </div>
+          <div class="description" id="animDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+    
+
+    <div class="row justify-content-center">
+        <h2 class="section-heading">Atmosphere</h2>
+        <br></br>
+        <br></br>
+
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Music</strong>
+            <span class="value-display" id="muscValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="10" value="0" class="slider" id="muscSlider" data-output="muscValue" data-desc="muscDesc">
+            <span class="max-label">10</span>
+          </div>
+          <div class="description" id="muscDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+    
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Sound</strong>
+            <span class="value-display" id="sounValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="4" value="0" class="slider" id="sounSlider" data-output="sounValue" data-desc="sounDesc">
+            <span class="max-label">4</span>
+          </div>
+          <div class="description" id="sounDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+        <br></br>
+
+        <div class="styled-slider">
+          <div class="slider-header">
+            <strong>Aesthetic</strong>
+            <span class="value-display" id="aesValue">0</span>
+          </div>
+          <div class="slider-wrapper">
+            <span class="min-label">0</span>
+            <input type="range" min="0" max="4" value="0" class="slider" id="aesSlider" data-output="aesValue" data-desc="aesDesc">
+            <span class="max-label">4</span>
+          </div>
+          <div class="description" id="aesDesc"></div>
+        </div>
+        <br></br>
+        <br></br>
+
+        <br></br>
+        <div class="center">
+          <form method="POST" action="{% url 'game' game.id%}">
+            {% csrf_token %}
+            <input type="hidden" name="value" id="totalInput">
+            <span id="totalSum" hidden></span>
+            <button type="submit" class="button-85" role="button">Save</button>
+          </form>
+        </div>
+    
+  </div>
+</div>
+    </section>
+    
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+  const sliders = document.querySelectorAll('.slider');
+  const sliders_p = document.querySelectorAll('.slider_p');
+
+  const storyDescriptions = [
+    "Poor story", "Poor story", "The story is not the main goal of the game", "The story is not the main goal of the game", "The story is not the main goal of the game",
+    "The story is well-matched with the game as a whole", "The story is well-matched with the game as a whole", "The plot is written at a high level", "The plot is written at a high level", "The plot is written at a high level", "The best story I've ever seen!"
+  ];
+
+  const balanceDescription = [
+    "The developers didn't even try to balance it", "The developers didn't even try to balance it", "The developers didn't even try to balance it", "Feeling like one person is doing the balancing", "Feeling like one person is doing the balancing",
+    "Developers listen to players' advice", "Developers listen to players' advice", "Developers listen to players' advice", "The game is well balanced", "The game is well balanced", "Perfectly-balanced game"
+  ];
+
+  const baseDescription = [
+    "The game is designed to impress gamers with an unforgettable storyline", 
+    "Mostly a multiplayer game where story has the lowest priority"
+  ];
+
+  const uniqDescription = [
+    "The game offers nothing new", "Several new mechanics", 
+    "The game mechanics make you want to play this game", "The mechanics of this game are icons for new games and genres", "The game itself gives rise to new games and genres"
+  ]
+
+  const techDescription = [
+    "Bad for the eyes", "Graphic made by one person", "Good for the eyes", "It's nice to be in game", "Masterpiece"
+  ]
+
+  const aestDescription = [
+    "A lot of bugs", "Developers have come to terms with bugs", "There are some bugs that affect the game", "There are some bugs that does not affect the game", "Almost/No bugs"
+  ]
+
+  const animDesctiption = [
+    "Slide-show", "Almost believed", "Avarage", "Smooth enough", "Great animations"
+  ]
+
+  const muscDescription = [
+    "Earrape", "Sounds bad", "Sounds bad", "Sounds bad", "Not my type", "Not my type", "Nice to listen in game", "Nice to listen in game", "You can enjoy to this outside of the game",
+    "You can enjoy to this outside of the game", "Listening it every day on repeat" 
+  ]
+
+  const sounDescription = [
+    "Worst part of the game", "Bad quality", "Does not interfere", "Well sounds", "Masterpiece sounds"
+  ]
+
+  const worldDescription = [
+    "This world have no sensce", "Not logical and not well thought out", "Not logical and not well thought out", "Not logical and not well thought out", "Well planned in places",
+    "Well planned in places", "Well planned in places", "Want to play other games with the same world", "Want to play other games with the same world", "Will read and review everything related to this world", "Will read and review everything related to this world"
+  ]
+
+  const aesDescription = [
+    "Disgusting aesthetics", "Definitely not my taste", "Aesthetical", "It's good to be in the game virtually", "It's a shame you can't experience such beauty with your own eyes"
+  ]
+
+  const descriptionMap = {
+    'storySlider': storyDescriptions,
+    'balanceSlider': balanceDescription,
+    'baseSlider': baseDescription,
+    'uniqSlider': uniqDescription,
+    'techSlider': techDescription,
+    'aestSlider': aestDescription,
+    'animSlider': animDesctiption,
+    'muscSlider': muscDescription,
+    'sounSlider': sounDescription,
+    'worldSlider' : worldDescription,
+    'aesSlider' : aesDescription,
+  };
+
+  function updateOutputs() {
+  sliders.forEach(slider => {
+    const val = parseInt(slider.value);
+    const outputId = slider.dataset.output;
+    const descId = slider.dataset.desc;
+
+    const outputSpan = document.getElementById(outputId);
+    const descSpan = document.getElementById(descId);
+
+    if (outputSpan) outputSpan.textContent = val;
+
+    const descArray = descriptionMap[slider.id];
+    const index = val - parseInt(slider.min || 0);
+    if (descSpan && descArray) {
+      descSpan.textContent = descArray[index] || '';
+    }
+  });
+
+  sliders_p.forEach(slider => {
+    const val = parseInt(slider.value);
+    const outputId = slider.dataset.output;
+    const descId = slider.dataset.desc;
+
+    const outputSpan = document.getElementById(outputId);
+    const descSpan = document.getElementById(descId);
+
+    if (outputSpan) outputSpan.textContent = val;
+
+    const descArray = descriptionMap[slider.id];
+    const index = val - parseInt(slider.min || 0);
+    if (descSpan && descArray) {
+      descSpan.textContent = descArray[index] || '';
+    }
+  });
+  }
+
+  function updateTotal() {
+  let total = 0;
+  // const baseVal = Number(document.getElementById('baseSlider').value);
+  const baseVal = 1;
+
+  sliders.forEach(slider => {
+    const sliderVal = Number(slider.value);
+    const sliderId = slider.id;
+
+    if (sliderId === 'storySlider') {
+      total += sliderVal * baseVal;
+    } else {
+      total += sliderVal;
+    }
+  });
+
+  document.getElementById('totalSum').textContent = total;
+  document.getElementById('totalInput').value = total;
+}
+
+  function handleUpdate() {
+    updateOutputs();
+    updateTotal();
+  }
+
+  sliders.forEach(slider => {
+    slider.addEventListener('input', handleUpdate);
+  });
+
+  sliders_p.forEach(slider => {
+    slider.addEventListener('input', handleUpdate);
+  });
+
+  handleUpdate();
+});
+</script>
+
+
+
+  </main>
+{% endblock %}

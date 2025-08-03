@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Login</h1>
+                <form method="POST" action="{% url 'login'%}">
+                    {% csrf_token %}
+                <div class="form-group">
+                    <input type="text" class="form-control" name="username" placeholder="enter your username">
+                </div>
+                <br></br>
+                <div class="form-group">
+                    <input type="password" class="form-control" name="password" placeholder="enter your password">
+                </div>
+                <div class="form-group form-check">
+                </div>
+                <button type="submit" class="btn btn-secondary">Login</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="breadcrumbs">
+        <div class="container">
+          <ol>
+            <li><a href="index.html">Home</a></li>
+            <li class="current">About</li>
+          </ol>
+        </div>
+      </nav>
+    </div><!-- End Page Title -->
+      </div>
+    {% endblock %}

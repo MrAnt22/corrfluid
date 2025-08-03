@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<title>About</title>
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>About</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-4">
+            <img src="{% static 'assets/img/corrf.png' %}" class="img-fluid" alt="">
+          </div>
+          <div class="col-lg-5 content">
+            <h2>About present and future.</h2>
+            <p class="py-3">
+              I should warn you that this idea of site is hard to 'embody'. I dreamed once with a thought that it was possible to improve all these similar sites with ratings where you are forced to give a product from 1 to n points. People, without thinking about the idea, process, etc., give all products the maximum or minimum score. In childhood, teachers said "even for F mark you have to earn it". 
+              What can we talk about when after one 5-minute scene people are ready to idolize this product.
+            </p>
+            <p class="m-0"> 
+                My site is purely about video games. It's almost impossible to think out the right rating system for every game perfectly. Everyone plays games in their own way: multiplayer/singleplayer, casual/hardcore style. 
+                Building it so that everyone can rate their favorite game to the maximum is very difficult - which was necessary in the end. No need to say that "this is the best I've seen!", although it is possible too.
+            </p>
+            <p class="py-3">
+                We need to face the truth - "Is the plot and characters written so well here?", "Can this game be considered balanced?", "Is the developer trying to support this game despite the years?". Regarding the last quote, <u>games that require additional content (dlc, mods) can be considered the same game and evaluated the same as the original game</u> (perhaps this may be changed by time).
+            </p>
+            <p class="m-0">
+                As I said, all the criteria were invented by me and they may seem wrong to you. The site will be updated from time to time and you can influence these same criteria by writing about it to the gmail <strong>corrfluid@gmail.com</strong>.
+                Thanks for <a href="https://themewagon.com/themes/photofolio/">bootstrap</a> and <a href="https://rawg.io/">game list.</a>
+                Special thanks to <a href="https://www.youtube.com/@Codemycom">Codemy.com</a> for amazing guides through my project. 
+            </p>
+        </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    {% endblock %}

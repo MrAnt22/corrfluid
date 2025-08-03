@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content%}
+<style>
+    .container, .heading, .page-title {
+    color: #fff;
+  }
+
+  .form-helptext, .helptext {
+    font-size: 0.85em;
+    color: #888;
+  }
+
+  ul.errorlist {
+    color: #ff7373;
+    list-style: none;
+    padding-left: 0;
+  }
+
+  nav.breadcrumbs ol li a,
+  nav.breadcrumbs ol li.current {
+    color: #aaa;
+  }
+
+  form {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+</style>
+
+<div class="page-title" data-aos="fade">
+  <div class="heading">
+    <div class="container">
+      <div class="row d-flex justify-content-center text-center">
+        <div class="col-lg-8">
+          <h1>Register</h1>
+          <div class="col-md-6 offset-md-3">
+            <form method="POST" action="{% url 'register' %}">
+              {% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="cta-btn">Register</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="breadcrumbs">
+    <div class="container">
+      <ol>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li class="current">Register</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+{% endblock %}
