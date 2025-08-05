@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+<title>{{ user }}'s profile</title>
+<main class="main">
+
+    <!-- Gallery Details Section -->
+    <section id="gallery-details" class="gallery-details section">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-between gy-4 mt-4">
+
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="portfolio-description">
+                {% for obj in objs %}
+                <div class="card mb-3" style="max-width: 540px; background-color: rgb(3, 0, 21); color: white;">
+                    <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ obj.game.image }}" class="img-fluid rounded-start" style="height: 100px; object-fit: cover;" alt="{{ obj.game.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'game_detail' obj.game.id %}" style="color:white;">{{ obj.game.name }}</a></h5>
+                        <h5>User's Rating {{ obj.value }}</h5>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+          </div>
+
+          <div class="col-lg-3" data-aos="fade-up" data-aos-delay="100">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Username</strong> {{ user }}</li>
+                <li><strong>Email</strong> {{ user.email }}</li>
+                <li><strong>Total reviews</strong>{{ total }}</li>
+                <li><strong>Highest review</strong>{{ max }}</a></li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Gallery Details Section -->
+
+  </main>
+
+  {% endblock %}

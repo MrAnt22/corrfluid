@@ -9,12 +9,12 @@
         <div class="container">
           <div class="row d-flex justify-content-center text-center">
             <div class="col-lg-8">
-              <h1>List of Games</h1>
-              <form class="d-flex" method="POST" action="{% url 'searched_games' %}">
-                {% csrf_token %}
-                <input type="text" name="searched" class="form-control" style="background-color: black; color: burlywood;" placeholder="Search for a specific game">
-                  <button type="submit" class="cta-btn">Search</button>
-              </form>
+              <h1>Search for a Game</h1>
+                <form method="POST" action="{% url 'searched_games' %}">
+                    {% csrf_token %}
+                    <input type="text" name="searched" class="form-control" style="background-color: black; color: burlywood;">
+                    <button type="submit" class="cta-btn btn btn-success">Search</button>
+                </form>
             </div>
           </div>
         </div>

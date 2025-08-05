@@ -5,7 +5,7 @@ import requests
 import os
 import pandas as pd
 from bs4 import BeautifulSoup
-from django.db.models import Avg
+from django.db.models import Avg, Max
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -184,6 +184,17 @@ def user_total(request, pk):
     average = Assessment.objects.filter(game=game).aggregate(Avg('value'))
     avg = int(average['value__avg'])
     return render(request, "user_total.html", {'game' : game, 'value' : value, 'average' : avg})
+
+def profile(request):
+    user = request.user
+    total = Assessment.objects.filter(user=user).count()
+    max = Assessment.objects.filter(user=user).aggregate(Max('value'))
+    max_a = max['value__max']
+    rat = Assessment.objects.filter(user=user)
+    objs = Assessment.objects.filter(user=user).order_by('-value')[:3]
+
+
+    return render(request, 'profile.html', {'user' : user, 'total' : total, 'max' : max_a, 'objs' : objs, 'rating' : rat})
 
 def gallery(request):
     if request.method == "POST":

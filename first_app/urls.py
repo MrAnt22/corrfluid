@@ -15,5 +15,6 @@ urlpatterns = [
     path('list/', views.list, name='list'),
     path('game_detail/<int:pk>', views.game_detail, name="game_detail"),
     path('gd_iframe/<int:pk>', views.game_detail_iframe, name="gd-iframe"),
-    path('about/', views.about, name='about')
+    path('about/', views.about, name='about'),
+    path('profile/', views.profile, name='profile')
 ]
