@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+<title>List of Games</title>
+      <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>{{ user }} Rates</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<section id="gallery" class="gallery section">
+  <div class="container section-title" data-aos="fade-up">
+    <div class="row gy-4">
+      {% for obj in objs %}
+        <div class="col-lg-6">
+          <div class="card mb-3" style="max-width: 540px; background-color: rgb(21, 0, 3)">
+
+            <div class="row g-0">
+                <div class="col-xl-3 col-lg-4 col-md-6">
+              <div class="gallery-item h-100">
+                <img src="{{ obj.game.image }}" class="img-fluid" style="height: 70px;" alt="{{ obj.game }}">
+                <div class="gallery-links d-flex align-items-center justify-content-center">
+                <a href="{{ obj.game.image }}" title="Gallery 1" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                <a href="{% url 'game_detail' obj.game.id %}" class="details-link"><i class="bi bi-link-45deg"></i></a>
+              </div>
+              </div>
+                </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="{% url 'game_detail' obj.game.id %}">{{ obj.value }} : {{ obj.game }}</a></h5>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+
+      <div class="pagination">
+      {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo;</a>
+        <a href="?page={{ page_obj.previous_page_number }}">&lsaquo;</a>
+      {% else %}
+        <span class="disabled">&laquo;</span>
+        <span class="disabled">&lsaquo;</span>
+      {% endif %}
+
+      {% for i in page_obj.paginator.page_range %}
+        {% if page_obj.number == i %}
+          <a class="active">{{ i }}</a>
+        {% elif i > page_obj.number|add:'-3' and i < page_obj.number|add:'3' %}
+          <a href="?page={{ i }}">{{ i }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">&rsaquo;</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
+      {% else %}
+        <span class="disabled">&rsaquo;</span>
+        <span class="disabled">&raquo;</span>
+      {% endif %}
+    </div>
+    </div>
+  </div>
+  </section>
+    </div>
+    <br></br>
+
+
+    
+    
+
+
+{% endblock %}

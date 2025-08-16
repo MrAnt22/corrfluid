@@ -16,5 +16,10 @@ urlpatterns = [
     path('game_detail/<int:pk>', views.game_detail, name="game_detail"),
     path('gd_iframe/<int:pk>', views.game_detail_iframe, name="gd-iframe"),
     path('about/', views.about, name='about'),
-    path('profile/', views.profile, name='profile')
+    path('profile/', views.profile, name='profile'),
+    path('friend_profile/<int:userID>', views.friend_profile, name='friend_profile'),
+    path('user_games/', views.user_games, name='user_games'),
+    path('users/', views.users_list, name='users-list'),
+    path('accept_friend_request/<int:requestID>', views.accept_friend_request, name="accept-friend-request"),
+    path('send_friend_request/<int:userID>', views.send_friend_request, name="send-friend-request"),
 ]

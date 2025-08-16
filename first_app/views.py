@@ -8,13 +8,12 @@ from bs4 import BeautifulSoup
 from django.db.models import Avg, Max
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.clickjacking import xframe_options_exempt
 from .forms import SignUpForm, AssessmentForm
-from .models import Game, Assessment
+from .models import Game, Assessment, FriendRequest, User
 
 
 #web scrapping bs4
@@ -92,6 +91,40 @@ from .models import Game, Assessment
 #         info[col] = data[col].tolist()
 #     return info
 
+def users_list(request):
+    friend_request = FriendRequest.objects.filter(to_user=request.user.id)
+
+    users = User.objects.exclude(id=request.user.id)
+    friends = request.user.friends.all()
+
+    return render(request, 'users.html', {'users' : users, 'all_friend_request' : friend_request, 'friends' : friends})
+
+def send_friend_request(request, userID):
+    from_user= request.user
+    to_user = User.objects.get(id=userID)
+    friend_request, created = FriendRequest.objects.get_or_create(from_user=from_user, to_user=to_user)
+    if from_user == to_user:
+        messages.success(request, ('You cannot send friend request to yourself'))
+        return redirect('users-list')
+    elif created:
+        messages.success(request, ('Friend request sent'))
+        return redirect('home')
+    else:
+        messages.success(request, ('Friend request already sent'))
+        return redirect('home')
+    
+def accept_friend_request(request, requestID):
+    friend_request = FriendRequest.objects.get(id=requestID)
+    if friend_request.to_user == request.user:
+        friend_request.to_user.friends.add(friend_request.from_user)
+        friend_request.from_user.friends.add(friend_request.to_user)
+        friend_request.delete()
+        messages.success(request, ('Friend request accepted'))
+        return redirect('home')
+    else:
+        messages.success(request, ('Friend request not accepted'))
+        return redirect('home')
+    
 def game(request,pk):
     game = Game.objects.get(id=pk)
     form = AssessmentForm()
@@ -155,8 +188,10 @@ def list(request):
     user = request.user
 
     games = Game.objects.all()
-    paginator = Paginator(games, 10)
+    sort = Game.objects.annotate(max_rating=Max('assessment__value')).order_by('-max_rating')
+
     page_number = request.GET.get('page')
+    paginator = Paginator(sort, 10)
     try:
         page_obj = paginator.get_page(page_number)
     except PageNotAnInteger:
@@ -184,6 +219,31 @@ def user_total(request, pk):
     average = Assessment.objects.filter(game=game).aggregate(Avg('value'))
     avg = int(average['value__avg'])
     return render(request, "user_total.html", {'game' : game, 'value' : value, 'average' : avg})
+
+def friend_profile(request, userID):
+    user = User.objects.get(id=userID)
+    total = Assessment.objects.filter(user=user).count()
+    max = Assessment.objects.filter(user=user).aggregate(Max('value'))
+    max_a = max['value__max']
+    rat = Assessment.objects.filter(user=user)
+    objs = Assessment.objects.filter(user=user).order_by('-value')[:3]
+
+    return render(request, 'profile.html', {'user' : user, 'total' : total, 'max' : max_a, 'objs' : objs, 'rating' : rat})
+
+
+def user_games(request):
+    user = request.user
+    objs = Assessment.objects.filter(user=user).order_by('-value')
+    paginator = Paginator(objs, 10)
+    page_number = request.GET.get('page')
+    try:
+        page_obj = paginator.get_page(page_number)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+    return render(request, 'user_games.html', {'objs' : objs, 'page_obj' : page_obj, 'user' : user})
 
 def profile(request):
     user = request.user

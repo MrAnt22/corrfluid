@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<title>About</title>
+<main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title" data-aos="fade">
+      <div class="heading">
+        <div class="container">
+          <div class="row d-flex justify-content-center text-center">
+            <div class="col-lg-8">
+              <h1>Friend requests</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="row gy-4 justify-content-center">
+          <div class="col-lg-5 content">
+            {% for user in allusers %}
+            {% if user not in request.user.friends.all and user is not request.user %}
+            <h1>{{ user }} <a href="/send_friend_request/{{user.id}}"></a>send friend request</h1>
+            {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    {% endblock %}
